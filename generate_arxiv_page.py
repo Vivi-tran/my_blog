@@ -10,7 +10,7 @@ def format_entry(entry):
     summary = entry.summary.strip().replace('\n', ' ')
     return f"""
     <div class="paper">
-      <h3><a href="{entry.link}" target="_blank">{entry.title}</a></h3>
+      <h3><a href="{entry.link}" target="_blank" rel="noopener">{entry.title}</a></h3>
       <p><strong>Authors:</strong> {authors}</p>
       <p>{summary[:300]}...</p>
     </div>
@@ -25,17 +25,53 @@ with open("arxiv.html", "w", encoding="utf-8") as f:
     f.write("""<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Latest arXiv Papers</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Latest arXiv Papers - Biomolecules</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; }
-    .paper { border-bottom: 1px solid #ccc; margin-bottom: 1rem; padding-bottom: 1rem; }
-    h1, h2 { color: #333; }
+    body {
+      font-family: 'Fira Code', monospace;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header, footer {
+      background-color: #282c34;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .paper {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>arXiv Paper Feed</h1>
 
+<header>
+  <h1>My Blog</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">About</a>
+    <a href="arxiv.html">Latest Papers</a>
+  </nav>
+</header>
+
+<main>
   <h2>🔬 Latest arXiv Papers in Biomolecules</h2>
 """)
 
@@ -47,4 +83,12 @@ with open("arxiv.html", "w", encoding="utf-8") as f:
     for entry in peptide_feed.entries:
         f.write(format_entry(entry))
 
-    f.write("</body></html>")
+    f.write("""
+</main>
+
+<footer>
+  © 2025 My Blog | Powered by arXiv API
+</footer>
+
+</body>
+</html>""")
