@@ -1,93 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Latest arXiv Papers - AI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Latest arXiv Papers</title>
   <style>
-    body {
-      font-family: 'Fira Code', monospace;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header, footer {
-      background-color: #282c34;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-    .paper {
-      border-bottom: 1px solid #ccc;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-    }
+    body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; }
+    .paper { border-bottom: 1px solid #ccc; margin-bottom: 1rem; padding-bottom: 1rem; }
+    h1, h2 { color: #333; }
   </style>
 </head>
 <body>
+  <h1>arXiv Paper Feed</h1>
 
-<header>
-  <h1>My Blog</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="#">Projects</a>
-    <a href="#">About</a>
-    <a href="arxiv.html">Latest Papers</a>
-  </nav>
-</header>
+  <h2>🔬 Latest arXiv Papers in Biomolecules</h2>
 
-<main>
-  <h2>Latest arXiv Papers in Biomolecules</h2>
-  <div id="papers">Loading...</div>
-</main>
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.21085v1" target="_blank">CovDocker: Benchmarking Covalent Drug Design with Tasks, Datasets, and
+  Solutions</a></h3>
+      <p><strong>Authors:</strong> Yangzhe Peng, Kaiyuan Gao, Liang He, Yuheng Cong, Haiguang Liu, Kun He, Lijun Wu</p>
+      <p>Molecular docking plays a crucial role in predicting the binding mode of ligands to target proteins, and covalent interactions, which involve the formation of a covalent bond between the ligand and the target, are particularly valuable due to their strong, enduring binding nature. However, most exis...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.20830v1" target="_blank">Bridging Classical Molecular Dynamics and Quantum Foundations for
+  Comprehensive Protein Structural Analysis</a></h3>
+      <p><strong>Authors:</strong> Don Roosan, Rubayat Khan, Tiffany Khou, Saif Nirzhor, Fahmida Hai, Brian Provencher</p>
+      <p>The objective of this paper is to investigate the structural stability, dynamic properties, and potential interactions among Amyloid Precursor Protein (APP), Tau, and Alpha-synuclein through a series of molecular dynamics simulations that integrate publicly available structural data, detailed force-...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.20686v1" target="_blank">MegaFold: System-Level Optimizations for Accelerating Protein Structure
+  Prediction Models</a></h3>
+      <p><strong>Authors:</strong> Hoa La, Ahan Gupta, Alex Morehead, Jianlin Cheng, Minjia Zhang</p>
+      <p>Protein structure prediction models such as AlphaFold3 (AF3) push the frontier of biomolecular modeling by incorporating science-informed architectural changes to the transformer architecture. However, these advances come at a steep system cost, introducing: compute- and memory-intensive operators, ...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.20052v1" target="_blank">Modelling Statistics of Polypeptides in Emissions from Smokers Near
+  Ocean Ridges</a></h3>
+      <p><strong>Authors:</strong> Ben Intoy, J. W. Halley</p>
+      <p>We have previously shown in model studies that rapid quenches of systems of monomers interacting to form polymer chains can fix nonequilibrium chemistries which could lead to the origin of life. We suggested that such quenching processes might have occurred at very high rates on early earth, giving ...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.20043v1" target="_blank">PocketVina Enables Scalable and Highly Accurate Physically Valid Docking
+  through Multi-Pocket Conditioning</a></h3>
+      <p><strong>Authors:</strong> Ahmet Sarigun, Bora Uyar, Vedran Franke, Altuna Akalin</p>
+      <p>Sampling physically valid ligand-binding poses remains a major challenge in molecular docking, particularly for unseen or structurally diverse targets. We introduce PocketVina, a fast and memory-efficient, search-based docking framework that combines pocket prediction with systematic multi-pocket ex...</p>
+    </div>
+    <h2>🧬 Latest arXiv Papers in Peptides</h2>
 
-<footer>
-  © 2025 My Blog | Powered by arXiv API
-</footer>
-
-<script>
-  const apiUrl = "https://export.arxiv.org/api/query?search_query=cat:q-bio.BM&start=0&max_results=5&sortBy=submittedDate&sortOrder=descending";
-
-  fetch(apiUrl)
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-    .then(data => {
-      const entries = data.querySelectorAll("entry");
-      const container = document.getElementById("papers");
-      container.innerHTML = "";
-
-      entries.forEach(entry => {
-        const title = entry.querySelector("title").textContent.trim();
-        const id = entry.querySelector("id").textContent;
-        const authors = [...entry.querySelectorAll("author > name")].map(e => e.textContent).join(", ");
-        const summary = entry.querySelector("summary").textContent.trim();
-
-        const html = `
-          <div class="paper">
-            <h3><a href="${id}" target="_blank" rel="noopener">${title}</a></h3>
-            <p><strong>Authors:</strong> ${authors}</p>
-            <p>${summary.substring(0, 300)}...</p>
-          </div>
-        `;
-        container.innerHTML += html;
-      });
-    })
-    .catch(err => {
-      document.getElementById("papers").innerText = "Failed to load arXiv data.";
-      console.error(err);
-    });
-</script>
-
-</body>
-</html>
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.16084v1" target="_blank">Aptamer-protein interaction prediction model based on transformer</a></h3>
+      <p><strong>Authors:</strong> Zhichao Yan, Yue Kang, Buyong Ma</p>
+      <p>Aptamers are single-stranded DNA/RNAs or short peptides with unique tertiary structures that selectively bind to specific targets. They have great potential in the detection and medical fields. Here, we present SelfTrans-Ensemble, a deep learning model that integrates sequence information models and...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.13485v1" target="_blank">Curriculum Learning for Biological Sequence Prediction: The Case of De
+  Novo Peptide Sequencing</a></h3>
+      <p><strong>Authors:</strong> Xiang Zhang, Jiaqi Wei, Zijie Qiu, Sheng Xu, Nanqing Dong, Zhiqiang Gao, Siqi Sun</p>
+      <p>Peptide sequencing-the process of identifying amino acid sequences from mass spectrometry data-is a fundamental task in proteomics. Non-Autoregressive Transformers (NATs) have proven highly effective for this task, outperforming traditional methods. Unlike autoregressive models, which generate token...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.12821v1" target="_blank">PDCNet: a benchmark and general deep learning framework for activity
+  prediction of peptide-drug conjugates</a></h3>
+      <p><strong>Authors:</strong> Yun Liu, Jintu Huang, Yingying Zhu, Congrui Wen, Yu Pang, Ji-Quan Zhang, Ling Wang</p>
+      <p>Peptide-drug conjugates (PDCs) represent a promising therapeutic avenue for human diseases, particularly in cancer treatment. Systematic elucidation of structure-activity relationships (SARs) and accurate prediction of the activity of PDCs are critical for the rational design and optimization of the...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2506.09809v1" target="_blank">Surface Induced Frustration of Inherent Dipolar Order in Nanoconfined
+  Water</a></h3>
+      <p><strong>Authors:</strong> Sayantan Mondal, Saumyak Mukherjee, Biman Bagchi</p>
+      <p>Surface effects could play a dominant role in modifying the natural liquid order. In some cases, the effects of the surface interactions can propagate inwards, and even can interfere with a similar propagation from opposite surfaces. This can be particularly evident in liquid water under nano-confin...</p>
+    </div>
+    
+    <div class="paper">
+      <h3><a href="http://arxiv.org/abs/2505.21452v1" target="_blank">Designing Cyclic Peptides via Harmonic SDE with Atom-Bond Modeling</a></h3>
+      <p><strong>Authors:</strong> Xiangxin Zhou, Mingyu Li, Yi Xiao, Jiahan Li, Dongyu Xue, Zaixiang Zheng, Jianzhu Ma, Quanquan Gu</p>
+      <p>Cyclic peptides offer inherent advantages in pharmaceuticals. For example, cyclic peptides are more resistant to enzymatic hydrolysis compared to linear peptides and usually exhibit excellent stability and affinity. Although deep generative models have achieved great success in linear peptide design...</p>
+    </div>
+    </body></html>
